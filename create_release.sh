@@ -10,8 +10,9 @@ echo "Enter the ticket(s) number (e.g. 'TGB-123, TGB-423'):"
 read tickets
 
 # Step 2: Normalize the ticket strings by replacing commas, spaces,
-# and other non-alphanumeric characters (except for '_' and '-') with '_'
-cleanTickets=$(echo "$tickets" | sed 's/[^A-Za-z0-9_-]\+/_/g')
+# and other non-alphanumeric characters (except for '-' and '_') with '_'
+# Additionally, ensure that multiple tickets are separated by '_'
+cleanTickets=$(echo "$tickets" | sed -E 's/[ ,]+/_/g')
 
 # Step 3: Determine if the repository uses 'main' or 'master'
 # We check for the existence of 'origin/main'.
